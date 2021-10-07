@@ -220,12 +220,11 @@ XD to `"""
         await message.channel.send(response8)
         
         
-CHANNEL_ID = 767765551266398211
-CHANNEL_ID2 = 767765551266398211
+CHANNEL_ID = 850247048636137509
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
-    await channel.send("Good morning! Uhhh school beings again. Not much to say -_- good luck i guess idk ")
+    await channel.send("Good morning! Last day of school! finally over jesus")
 
 
 
