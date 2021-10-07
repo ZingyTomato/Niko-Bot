@@ -225,8 +225,29 @@ CHANNEL_ID = 850247048636137509
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
     await channel.send("Good morning! Last day of school! finally over jesus")
+    
 
-
+CHANNEL_ID = 850247048636137509
+@aiocron.crontab('0 */4 * * *')
+async def cornjob1():
+    channel = client.get_channel(CHANNEL_ID)
+    responserandom = random.choice([
+        "Haha",
+        'Ever wondered what the meaning of life is?',
+        'What did u have for breakfast',
+        'Did you see the US Open?',
+        'Whoever is ^ me will be banned',
+        'boring',
+        '...',
+        'Tbh what am I doing at this point',
+        'Did you know that-',
+        "Is the week over yet? I can't take it anymore",
+        'alr im done with this',
+        'im losing my mind stop-',
+        'all systems operational',
+    
+    ])
+    await channel.send(responserandom)   
 
 bot2 = commands.Bot(command_prefix='!')
 @bot2.command()
