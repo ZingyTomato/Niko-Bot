@@ -229,7 +229,18 @@ async def cornjob1():
 
 
 
-client.run('TOKEN')
+bot2 = commands.Bot(command_prefix='!')
+@bot2.command()
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, user: discord.Member, *, reason=None):
+  await ctx.guild.kick(user)
+  await ctx.send(f"{user} has been kicked sucessfully")
+
+loop = asyncio.get_event_loop()
+loop.create_task(bot2.start('TOKEN'))
+loop.create_task(client.start('TOKEN'))
+loop.run_forever()
+
 
 
 
