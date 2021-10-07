@@ -17,13 +17,6 @@ from discord.ext.commands import Bot
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-#bot = commands.Bot(command_prefix='!')
-#@bot.command()
-#@commands.has_permissions(kick_members=True)
-#async def kick(ctx, user: discord.Member, *, reason=None):
-#  await user.kick(reason=reason)
-#  await ctx.send(f"{user} has been kicked sucessfully")
-
 
 
 client = discord.Client()
