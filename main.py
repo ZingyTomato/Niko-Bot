@@ -260,8 +260,37 @@ async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
   await ctx.send(f"{user} has been kicked sucessfully")
 
+bot3 = commands.Bot(command_prefix='!')
+@bot3.command()
+async def serverinfo(ctx):
+  name = str(ctx.guild.name)
+  description = str(ctx.guild.description)
+
+  owner = str(ctx.guild.owner)
+  id = str(ctx.guild.id)
+  region = str(ctx.guild.region)
+  memberCount = str(ctx.guild.member_count)
+
+  icon = str(ctx.guild.icon_url)
+   
+  embed = discord.Embed(
+      title=name + " Server Information",
+      description=description,
+      color=discord.Color.blue()
+    )
+  embed.set_thumbnail(url=icon)
+  embed.add_field(name="Owner", value=owner, inline=True)
+  embed.add_field(name="Server ID", value=id, inline=True)
+  embed.add_field(name="Region", value=region, inline=True)
+  embed.add_field(name="Member Count", value=memberCount, inline=True)
+
+  await ctx.send(embed=embed)
+
+      
+
 loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
+loop.create_task(bot3.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.run_forever()
 
