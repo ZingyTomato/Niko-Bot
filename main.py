@@ -212,6 +212,10 @@ XD to `"""
         'https://tenor.com/view/challenge-find-out-when-this-gif-ends-rickroll-rickrolled-hidden-rickroll-gif-22493495',
         'https://tenor.com/view/itachi-meme-rick-roll-itachi-vs-sasuke-hidden-rick-roll-gif-21968202',
         'https://cdn.discordapp.com/attachments/852949806339063818/890091232808820736/saed.png',
+        'https://tenor.com/view/rickroll-spongebob-gif-20016904',
+        'https://tenor.com/view/rickroll-gif-22280972',
+        'https://tenor.com/view/cute-cat-rick-roll-gif-22622972',
+
                 
     ]
     
