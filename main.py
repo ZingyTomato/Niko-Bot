@@ -228,7 +228,7 @@ async def cornjob1():
     
 
 CHANNEL_ID = 850247048636137509
-@aiocron.crontab('0 */4 * * *')
+@aiocron.crontab('0 */6 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
     responserandom = random.choice([
