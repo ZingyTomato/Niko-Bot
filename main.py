@@ -260,8 +260,7 @@ async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
   await ctx.send(f"{user} has been kicked sucessfully")
 
-bot3 = commands.Bot(command_prefix='!')
-@bot3.command()
+@bot2.command()
 async def serverinfo(ctx):
   name = str(ctx.guild.name)
   description = str(ctx.guild.description)
@@ -286,11 +285,12 @@ async def serverinfo(ctx):
 
   await ctx.send(embed=embed)
 
+
+
       
 
 loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
-loop.create_task(bot3.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.run_forever()
 
