@@ -121,11 +121,11 @@ hai to insult people who are being nice
 XD to `"""
         await message.channel.send(help)
     if message.content == "Niko":
-        nik = "Niko here :sunglasses: Sup"
-        await message.channel.send(nik)
+        embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+        await message.channel.send(embed=embed)
     if message.content == "niko":
-        nik = "Niko here :sunglasses: Sup"
-        await message.channel.send(nik)
+        embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+        await message.channel.send(embed=embed)
  
         
     
