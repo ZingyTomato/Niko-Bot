@@ -15,16 +15,21 @@ from requests import get
 import aiocron
 from discord.ext.commands import Bot
 from neuralintents import GenericAssistant
+import h5py
+#from keras.models import load_model
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-chatbot = GenericAssistant('intents.json')
-chatbot.train_model()
-chatbot.save_model()
 
+
+#chatbot = GenericAssistant('intents.json')
+#chatbot.train_model()
+#chatbot.save_model()
 
 client = discord.Client()
 client2 = discord.Client()
+
+
 def get_quote():
     response = requests.get(
         "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist&type=single"
@@ -90,8 +95,10 @@ async def on_message(message):
      await message.channel.send(response)     
     if message.content == 'fudge':
         response11 = "https://tenor.com/view/stephen-colbert-fudge-yourself-gif-12825593"
+        await message.channel.send(response11) 
     if message.content == ":KEKW:":
         response5 = "stop laughing. we only experience despair and depression -__-"
+        await message.channel.send(response5) 
     if message.content == ":kekw:":
         response5 = "stop laughing. we only experience despair and depression -__-"      
         await message.channel.send(response5)
@@ -113,7 +120,7 @@ async def on_message(message):
     if message.content == 'tom tom':
         response9 = "https://tenor.com/view/tom-go-tom-gif-20838220"
         await message.channel.send(response9)
-   if message.content == '.help':
+    if message.content == '.help':
         embed=discord.Embed(title="List of commands", description="""
 .help to access this list again
 meme to view some of the cringiest memes that you have ever seen (totally not NSFW)
@@ -131,7 +138,9 @@ Niko + blah blah to get a response""")
     if message.content == "niko":
         embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
         await message.channel.send(embed=embed)
- 
+        
+
+
         
     
     
@@ -220,22 +229,35 @@ Niko + blah blah to get a response""")
         'https://tenor.com/view/rickroll-spongebob-gif-20016904',
         'https://tenor.com/view/rickroll-gif-22280972',
         'https://tenor.com/view/cute-cat-rick-roll-gif-22622972',
-
                 
     ]
     
     if client.user.mentioned_in(message):
         response8 = random.choice(ping_quotes)
         await message.channel.send(response8)
-        
-        
+
 CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
     await channel.send("Good morning! Last day of school! finally over jesus")
     
-
+    
+    random_quotes = [
+        "Haha",
+        'Ever wondered what the meaning of life is?',
+        'What did u have for breakfast',
+        'Did you see the US Open?',
+        'Whoever is ^ me will be banned',
+        'boring',
+        '...',
+        'Tbh what am I doing at this point',
+        'Did you know that-',
+        "Is the week over yet? I can't take it anymore",
+        'alr im done with this',
+        'im losing my mind stop-',
+        'all systems operational',
+   ]
 CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 */6 * * *')
 async def cornjob1():
@@ -257,13 +279,18 @@ async def cornjob1():
     
     ])
     await channel.send(responserandom)   
+     
+    
 
-bot2 = commands.Bot(command_prefix='!')
+
+
+
+bot2 = commands.Bot(command_prefix='>')
 @bot2.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
-  await ctx.send(f"{user} has been kicked sucessfully")
+  await ctx.send(f"{user} has been kicked lol what a wimp =/")
 
 @bot2.command()
 async def serverinfo(ctx):
@@ -289,25 +316,37 @@ async def serverinfo(ctx):
   embed.add_field(name="Member Count", value=memberCount, inline=True)
 
   await ctx.send(embed=embed)
+  
 
 
-@client2.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+#@client2.event
+#async def on_message(message):
+ #   if message.author == client.user:
+  #      return
 
-    if message.content.startswith("Nik"):
-        response24 = chatbot.request(message.content[4:])
-        await message.channel.send(response24)
+#    if message.content.startswith("Nik"):
+ #       response24 = chatbot.request(message.content[4:])
+  #      await message.channel.send(response24)
 
-      
+
+@bot2.command()
+@commands.guild_only()
+async def niko(ctx, *,msgAI=None):
+    msgAI = msgAI or 'Hi'
+    url = requests.get('http://api.brainshop.ai/get?bid=160296&key=cXBfb0yjYQkz8aRE&uid=['+str(ctx.author.id)+']&msg='+msgAI)
+    decode = json.loads(url.text)
+    await ctx.send(decode['cnt'])
+
+
 
 loop = asyncio.get_event_loop()
-loop.create_task(bot2.start('TOKEN'))
-loop.create_task(client.start('TOKEN'))
-loop.create_task(client2.start('TOKEN'))
+loop.create_task(bot2.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
+loop.create_task(client.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
+loop.create_task(client2.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
 loop.run_forever()
 
+
+#client.run('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY')
 
 
 
