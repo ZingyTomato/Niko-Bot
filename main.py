@@ -340,9 +340,9 @@ async def niko(ctx, *,msgAI=None):
 
 
 loop = asyncio.get_event_loop()
-loop.create_task(bot2.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
-loop.create_task(client.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
-loop.create_task(client2.start('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY'))
+loop.create_task(bot2.start('TOKEN'))
+loop.create_task(client.start('TOKEN'))
+loop.create_task(client2.start('TOKEN'))
 loop.run_forever()
 
 
