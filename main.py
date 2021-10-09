@@ -130,14 +130,14 @@ im sad to see some inspirational quotes
 im bored to cheer yourself up
 fudge to see steven colbert hold a cake
 hai to insult people who are being nice
-Niko + blah blah to get a response""")
+niko + blah blah to get a response""")
         await message.channel.send(embed=embed)
-    if message.content == "Niko":
-        embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-        await message.channel.send(embed=embed)
-    if message.content == "niko":
-        embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-        await message.channel.send(embed=embed)
+    #if message.content == "Niko":
+     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+      #  await message.channel.send(embed=embed)
+    #if message.content == "niko":
+     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+      #  await message.channel.send(embed=embed)
         
 
 
@@ -285,7 +285,7 @@ async def cornjob1():
 
 
 
-bot2 = commands.Bot(command_prefix='>')
+bot2 = commands.Bot(command_prefix='!')
 @bot2.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason=None):
@@ -328,12 +328,12 @@ async def serverinfo(ctx):
  #       response24 = chatbot.request(message.content[4:])
   #      await message.channel.send(response24)
 
-
-@bot2.command()
+bot3 = commands.Bot(command_prefix='n')
+@bot3.command()
 @commands.guild_only()
-async def niko(ctx, *,msgAI=None):
+async def iko(ctx, *,msgAI=None):
     msgAI = msgAI or 'Hi'
-    url = requests.get('http://api.brainshop.ai/get?bid=160296&key=cXBfb0yjYQkz8aRE&uid=['+str(ctx.author.id)+']&msg='+msgAI)
+    url = requests.get('http://api.brainshop.ai/get?bid=ID&key=APIKEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
     decode = json.loads(url.text)
     await ctx.send(decode['cnt'])
 
@@ -341,12 +341,13 @@ async def niko(ctx, *,msgAI=None):
 
 loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
+loop.create_task(bot3.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
+print("Connected to discord!")
 loop.run_forever()
 
 
-#client.run('ODkwODE2MDcwMzIyMDk4MTk3.YU1THQ.yzy4ZPfbHxHUCW1i7MCF1WJMhUY')
 
 
 
