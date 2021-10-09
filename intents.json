@@ -9,7 +9,7 @@
     "responses": ["Sad to see you go :(", "Talk to you later!", "Goodbye!"],
     "context_set": ""
   },
-  {"tag": "feeling",
+  {"tag": "feeling feelin",
     "patterns": ["How are you feeling?", "Do you feel happy?", "Do you feel sad?", "How r u feeling?"],
     "responses": ["I feel good thanks!", "Im feeling weird idk why :(", "Im good ty!", "I feel nauseous (if thats how u spell it) =/ ", "Umm I guess im fine but thanks for asking!"],
     "context_set": ""
@@ -23,6 +23,28 @@
     "patterns": ["thank you", "thanks", "ty", "Thanks You"],
     "responses": ["No problem!", "Don't mention it.", ":blush:", "Ayy no issues man.", "Np"],
     "context_set": ""
+  },
+  {"tag": "are you",
+    "patterns": ["Who are you?", "What's your name", "What are you?"],
+    "responses": ["I'm Niko... that's about it.", "My name is Niko. Not sure where the name from.", "I am a bot duh.", "I am your creator"],
+    "context_set": ""
+  },
+  {"tag": "weather cold hot rain thunder snow",
+    "patterns": ["Whats the weather?", "Whats the weather in Russia", "Does Putin control the weather?", "Is it actually hot in Russia?"],
+    "responses": ["Its between 69 and 420 degrees kelvin.", "Thats classified!", "Maybe, Maybe Not, Who knows??", "Are you mad or just dumb?"],
+    "context_set": ""
+  },
+  {"tag": "superhero power Marvel",
+    "patterns": ["Do you like Marvel?", "What superpower do you want?", "Favorite superhero?", "Whats Putin's superpower", "r u a marvel fanboy?"],
+    "responses": ["Thats a big yes", "Hawkeye", "Physics ", "Fear"],
+    "context_set": ""
+  },
+  {"tag": "sports",
+    "patterns": ["Do you like sports?", "Which sport do you play?", "Who is you favourtie sports player?", "Which is the most popular sport?"],
+    "responses": ["No im a chatbot, what did you expect", "Does chatting count as a sport?", "Myself", "Just google it"],
+    "context_set": ""
   }
+
+
 ]
 }
