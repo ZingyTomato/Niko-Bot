@@ -113,8 +113,8 @@ async def on_message(message):
     if message.content == 'tom tom':
         response9 = "https://tenor.com/view/tom-go-tom-gif-20838220"
         await message.channel.send(response9)
-    if message.content == '.help':
-        help = """`List of commands : 
+   if message.content == '.help':
+        embed=discord.Embed(title="List of commands", description="""
 .help to access this list again
 meme to view some of the cringiest memes that you have ever seen (totally not NSFW)
 sus to well-
@@ -123,8 +123,8 @@ im sad to see some inspirational quotes
 im bored to cheer yourself up
 fudge to see steven colbert hold a cake
 hai to insult people who are being nice
-XD to `"""
-        await message.channel.send(help)
+Niko + blah blah to get a response""")
+        await message.channel.send(embed=embed)
     if message.content == "Niko":
         embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
         await message.channel.send(embed=embed)
