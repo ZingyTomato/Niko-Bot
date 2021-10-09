@@ -14,12 +14,17 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
+from neuralintents import GenericAssistant
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
+chatbot = GenericAssistant('intents.json')
+chatbot.train_model()
+chatbot.save_model()
 
 
 client = discord.Client()
+client2 = discord.Client()
 def get_quote():
     response = requests.get(
         "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist&type=single"
@@ -286,12 +291,21 @@ async def serverinfo(ctx):
   await ctx.send(embed=embed)
 
 
+@client2.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith("Nik"):
+        response24 = chatbot.request(message.content[4:])
+        await message.channel.send(response24)
 
       
 
 loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
+loop.create_task(client2.start('TOKEN'))
 loop.run_forever()
 
 
