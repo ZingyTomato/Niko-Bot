@@ -16,15 +16,12 @@ import aiocron
 from discord.ext.commands import Bot
 from neuralintents import GenericAssistant
 import h5py
-#from keras.models import load_model
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 
 
-#chatbot = GenericAssistant('intents.json')
-#chatbot.train_model()
-#chatbot.save_model()
+
 
 client = discord.Client()
 client2 = discord.Client()
@@ -132,13 +129,7 @@ fudge to see steven colbert hold a cake
 hai to insult people who are being nice
 niko + blah blah to get a response""")
         await message.channel.send(embed=embed)
-    #if message.content == "Niko":
-     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-      #  await message.channel.send(embed=embed)
-    #if message.content == "niko":
-     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-      #  await message.channel.send(embed=embed)
-        
+
 
 
         
@@ -240,7 +231,7 @@ CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
-    await channel.send("Good morning! Last day of school! finally over jesus")
+    await channel.send("O its monday its time for school. *wait we dont have school nwm*")
     
     
     random_quotes = [
@@ -319,14 +310,6 @@ async def serverinfo(ctx):
   
 
 
-#@client2.event
-#async def on_message(message):
- #   if message.author == client.user:
-  #      return
-
-#    if message.content.startswith("Nik"):
- #       response24 = chatbot.request(message.content[4:])
-  #      await message.channel.send(response24)
 
 bot3 = commands.Bot(command_prefix='n')
 @bot3.command()
