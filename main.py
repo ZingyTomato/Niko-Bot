@@ -110,7 +110,7 @@ async def on_message(message):
     if message.content.startswith('meme'):
         def meme(ctx):
          client = commands.Bot(command_prefix="!")
-        content = get("https://meme-api.herokuapp.com/gimme").text
+        content = get("https://meme-api.herokuapp.com/gimme?Flags=nsfw=false").text
         data = json.loads(content,)
         meme = discord.Embed(title=f"{data['title']}", Color = discord.Color.random()).set_image(url=f"{data['url']}")
         await message.channel.send(embed=meme)
