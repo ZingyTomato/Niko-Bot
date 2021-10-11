@@ -226,6 +226,29 @@ niko + blah blah to get a response""")
     if client.user.mentioned_in(message):
         response8 = random.choice(ping_quotes)
         await message.channel.send(response8)
+        
+    gambling_quotes = [
+        "yes",
+        'no',
+        'maybe',
+        'whats the date?',
+        'idk',
+        'google it',
+        'ask your mom',
+        'im not telling',
+        'ask tom tom',
+        'follow the river and you will shiver',
+        'ok ok ok',
+        'why u askin me',
+        "i don't care enough to give an answer",
+        "dont bother me",
+        "bugger of man",
+                
+    ]
+    
+    if message.content == 'gamble':
+      response3 = random.choice(gambling_quotes)
+      await message.channel.send(response3)
 
 CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
