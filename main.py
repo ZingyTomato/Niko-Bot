@@ -39,6 +39,13 @@ def get_quote():
   json_data = json.loads(response.text)
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
   return(quote)
+def get_quote_name():
+    response = requests.get(
+        "http://names.drycodes.com/1?nameOptions=boy_names"
+    )
+    json_data = json.loads(response.text)
+    randname = json_data[0]
+    return (randname)
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
@@ -103,6 +110,9 @@ async def on_message(message):
         embedVar = discord.Embed(title="Epicc Joke")
         quote = get_quote()
         await message.channel.send(quote, embed=embedVar)
+    if message.content.startswith('tell me a random name'):
+        quote2 = get_quote_name()
+        await message.channel.send(quote2)
     if message.content.startswith('im sad'):
         embed1 = discord.Embed(title="Inspirational Quote")
         quote1 = get_quote()
