@@ -127,7 +127,9 @@ im sad to see some inspirational quotes
 im bored to cheer yourself up
 fudge to see steven colbert hold a cake
 hai to insult people who are being nice
-niko + blah blah to get a response""")
+niko + blah blah to get a response
+gamble to take a gamble
+more to come!!""")
         await message.channel.send(embed=embed)
 
 
@@ -192,6 +194,82 @@ niko + blah blah to get a response""")
     if message.content == 'XD':
         response3 = random.choice(xd_quotes_quotes)
         await message.channel.send(response3)
+    if message.author == client.user:
+        return
+
+    lol_quotes = [
+        "what's so funny? i dont get it",
+        'hahaha funny',
+        'totally the funniest thing ever',
+        'whats the date?',
+        'do you know a monkey?',
+        'boring',
+        '...',
+        'do u have a brain? its not funny',
+        'smh so predictable',
+        'u suck',
+        'alr im done with this',
+        'u have no sense of humour',
+        'ok boomer',
+        'wow ur so funny!',
+        'thats so funny wow!',
+        'sorry but i just dont care',
+                
+    ]
+
+    if message.content == 'lol':
+        lolresponse = random.choice(lol_quotes)
+        await message.channel.send(lolresponse)
+    if message.content == 'LOL':
+        lolresponse = random.choice(lol_quotes)
+        await message.channel.send(lolresponse)
+    if message.content == 'LMAO':
+        lolresponse = random.choice(lol_quotes)
+        await message.channel.send(lolresponse)
+    if message.content == 'lmao':
+        lolresponse = random.choice(lol_quotes)
+        await message.channel.send(lolresponse)
+    if message.author == client.user:
+        return
+
+    name_quotes = [
+        "yeah what about him?",
+        'He is my creator',
+        'He programmed me.',
+        'pls no bully',
+        'hes amazing',
+        'lol he sux',
+        '...',
+        'yea hes dumb.',
+        'i dont have much to say about him',
+        'hes weird',
+        'i dont really ike him',
+        'maybe hes your friend but he isnt mine',
+        'he a boomer',
+        'hahahaahha',
+        'hes damn annoying smh',
+        'sorry but i just dont care',
+                
+    ]
+
+    if message.content == 'ani':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
+    if message.content == 'Ani':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
+    if message.content == 'zingy':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
+    if message.content == 'Zingy':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
+    if message.content == 'Anirudh':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
+    if message.content == 'anirudh':
+        nameresponse = random.choice(name_quotes)
+        await message.channel.send(nameresponse)
     if message.content == 'xd':
         response3 = random.choice(xd_quotes_quotes)
         await message.channel.send(response3)
