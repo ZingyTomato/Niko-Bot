@@ -53,9 +53,9 @@ async def on_ready():
 async def on_ready():
     await client.change_presence(activity = discord.Game('Your Friendly Neighbourhood SpiderBot'))
 
-@client.event
+@client2.event
 async def on_ready(): 
-    channel = client.get_channel(767765551266398211) 
+    channel = client2.get_channel(767765551266398211) 
     await channel.send("I'm back online! Please wait for a few minutes while I get everything ready!")
 
 
