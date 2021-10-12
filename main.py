@@ -25,6 +25,7 @@ TOKEN = os.getenv('TOKEN')
 
 client = discord.Client()
 client2 = discord.Client()
+client3 = discord.Client()
 
 
 def get_quote():
@@ -56,7 +57,12 @@ async def on_ready():
 @client2.event
 async def on_ready(): 
     channel = client2.get_channel(767765551266398211) 
-    await channel.send("I'm back online! Please wait for a few minutes while I get everything ready!")
+    await channel.send("I'm back online! Please wait for a few minutes while I get everything ready! If you are seeing this message repeatedly it means that my dumb owner, zingy :tomato: is constantly making changes.")
+@client3.event
+async def on_ready(): 
+    channel = client3.get_channel(850251488339951627) 
+    await channel.send("I'm back online! Please wait for a few minutes while I get everything ready! If you are seeing this message repeatedly it means that my dumb owner, zingy :tomato: is constantly making changes.")
+
 
 
 @client.event
@@ -442,6 +448,7 @@ loop.create_task(bot2.start('TOKEN'))
 loop.create_task(bot3.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
+loop.create_task(client3.start('TOKEN'))
 print("Connected to discord!")
 loop.run_forever()
 
