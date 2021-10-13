@@ -278,6 +278,19 @@ more to come!!""")
         lolresponse = random.choice(lol_quotes)
         await message.add_reaction("👍")
         await message.channel.send(lolresponse)
+    if message.content == '69':
+        await message.channel.send("Hhahha nice")
+        await message.add_reaction("👌")
+    if message.content == '420':
+        await message.channel.send("Hhahha nice")
+        await message.add_reaction("👌")
+    if message.content == '69420':
+        await message.add_reaction("👌")
+        await message.channel.send("Hhahha nice")
+    if message.content == 'pog':
+        await message.add_reaction("👌")
+        await message.channel.send("pogchamp")
+
     if message.author == client.user:
         return
 
