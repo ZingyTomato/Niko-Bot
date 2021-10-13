@@ -161,8 +161,13 @@ im sad to see some inspirational quotes
 im bored to cheer yourself up
 fudge to see steven colbert hold a cake
 hai to insult people who are being nice
-niko + blah blah to get a response
+niko + blah blah to get a response from an AI
 gamble to take a gamble
+tell me a random name to as the name suggests-
+mention the creators name (if you know him/her/it) for some great insults  
+!serverinfo to view info about the current server
+!kick + member to well... kick a member lol
+!wallpaper + blah blah to get a random wallpaper
 more to come!!""")
         await message.add_reaction("👍")
         await message.channel.send(embed=embed)
