@@ -1,6 +1,4 @@
-# bot.py
 import os
-
 import discord
 import random
 from dotenv import load_dotenv
@@ -14,8 +12,6 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
-from discord import Embed, Member
-from typing import Optional
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
