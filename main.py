@@ -16,16 +16,20 @@ import aiocron
 from discord.ext.commands import Bot
 from neuralintents import GenericAssistant
 import h5py
+from discord import FFmpegPCMAudio
+from discord import TextChannel
+import  youtube_dl 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
-
-
 
 
 
 client = discord.Client()
 client2 = discord.Client()
 client3 = discord.Client()
+
+
+
 
 
 def get_quote():
@@ -54,6 +58,9 @@ async def on_ready():
 async def on_ready():
     await client.change_presence(activity = discord.Game('Your Friendly Neighbourhood SpiderBot'))
 
+
+
+
 @client2.event
 async def on_ready(): 
     channel = client2.get_channel(767765551266398211) 
@@ -61,7 +68,7 @@ async def on_ready():
 @client3.event
 async def on_ready(): 
     channel = client3.get_channel(850251488339951627) 
-    await channel.send("I'm back online! Please wait for a few minutes while I get everything ready! If you are seeing this message repeatedly it means that my dumb owner, zingy :tomato: is constantly making changes.")
+    await channel.send("Guess what? He made another change so I'm forced to send this message. *smh this is so annoying*")
 
 
 
@@ -180,7 +187,20 @@ more to come!!""")
     ]
 
     if message.content == 'phys':
-        response2 = random.choice(physcis_quotes)
+        response2 = random.choices_quotes = [
+        "what's so funny? i dont get it",
+        'hahaha funny',
+        'totally the funniest thing ever',
+        'whats the date?',
+        'do you know a monkey?',
+        'boring',
+        '...',
+        'do u have a brain? its not funny',
+        'smh so predictable',
+        'u suck',
+        'alr im done with this',
+        'u have no sense of humour',
+        'ok boomer',]
         await message.channel.send(response2)
     if message.content == 'Phys':
         response2 = random.choice(physcis_quotes)
@@ -190,7 +210,8 @@ more to come!!""")
         await message.channel.send(response2)     
     if message.content == 'physics':
         response2 = random.choice(physcis_quotes)
-        await message.channel.send(response2)          
+        await message.channel.send(response2) 
+             
     if message.author == client.user:
         return
 
@@ -318,6 +339,7 @@ more to come!!""")
         'https://tenor.com/view/rickroll-spongebob-gif-20016904',
         'https://tenor.com/view/rickroll-gif-22280972',
         'https://tenor.com/view/cute-cat-rick-roll-gif-22622972',
+        'https://tenor.com/view/rickroll-yt-rewind-youtube-rewind-will-smith-prank-gif-21706791',
                 
     ]
     
@@ -348,6 +370,7 @@ more to come!!""")
       response3 = random.choice(gambling_quotes)
       await message.channel.send(response3)
 
+
 CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
@@ -369,9 +392,13 @@ async def cornjob1():
         'alr im done with this',
         'im losing my mind stop-',
         'all systems operational',
+        'boooooringgg',
+        'is anybody here or am i just talking to myself?',
+        'can you bring food to the psat exam?',
+        'im hungry',
    ]
 CHANNEL_ID = 850251488339951627
-@aiocron.crontab('0 */6 * * *')
+@aiocron.crontab('0 */3 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
     responserandom = random.choice([
@@ -388,11 +415,20 @@ async def cornjob1():
         'alr im done with this',
         'im losing my mind stop-',
         'all systems operational',
+        'find these messages annoying?',
+        'anybody saw squid game or whatever its called',
+        'guess what i get to annoy you more often now',
+        'is anybody here or am i just talking to myself?',
+        'can you bring food to the psat exam?',
+        'hahah eot in just 2 months your welcome',
+        
     
     ])
     await channel.send(responserandom)   
      
     
+
+
 
 
 
@@ -437,9 +473,10 @@ bot3 = commands.Bot(command_prefix='n')
 @commands.guild_only()
 async def iko(ctx, *,msgAI=None):
     msgAI = msgAI or 'Hi'
-    url = requests.get('http://api.brainshop.ai/get?bid=ID&key=APIKEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
+    url = requests.get('http://api.brainshop.ai/get?bid=APIKEY&key=KEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
     decode = json.loads(url.text)
     await ctx.send(decode['cnt'])
+
 
 
 
