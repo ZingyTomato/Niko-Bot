@@ -14,6 +14,10 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
+from neuralintents import GenericAssistant
+import h5py
+from discord import Embed, Member
+from typing import Optional
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -60,10 +64,10 @@ async def on_ready():
 async def on_ready(): 
     channel = client2.get_channel(767765551266398211) 
     await channel.send("I'm back online! Please wait for a few minutes while I get everything ready! If you are seeing this message repeatedly it means that my dumb owner, zingy :tomato: is constantly making changes.")
-@client3.event
-async def on_ready(): 
-    channel = client3.get_channel(850251488339951627) 
-    await channel.send("Guess what? He made another change so I'm forced to send this message. *smh this is so annoying*")
+#@client3.event
+#async def on_ready(): 
+ #   channel = client3.get_channel(850251488339951627) 
+  #  await channel.send("Maintenance complete.")
 
 
 
@@ -88,15 +92,19 @@ async def on_message(message):
     
     if message.content == 'hai':
         response1 = random.choice(hello_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response1)
     if message.content == 'hello':
         response1 = random.choice(hello_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response1)
     if message.content == 'Hello':
         response1 = random.choice(hello_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response1)
     if message.content == 'Hai':
         response1 = random.choice(hello_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response1)
 
     if message.content == 'monk':
@@ -105,29 +113,37 @@ async def on_message(message):
         return
     if message.content == 'sus':
      response = "https://tenor.com/view/sus-fry-futurama-gif-4691459"
+     await message.add_reaction("👍")
      await message.channel.send(response)
     if message.content == 'Sus':
      response = "https://tenor.com/view/sus-fry-futurama-gif-4691459"
+     await message.add_reaction("👍")
      await message.channel.send(response)     
     if message.content == 'fudge':
         response11 = "https://tenor.com/view/stephen-colbert-fudge-yourself-gif-12825593"
+        await message.add_reaction("👍")
         await message.channel.send(response11) 
     if message.content == ":KEKW:":
         response5 = "stop laughing. we only experience despair and depression -__-"
+        await message.add_reaction("👍")
         await message.channel.send(response5) 
     if message.content == ":kekw:":
-        response5 = "stop laughing. we only experience despair and depression -__-"      
+        response5 = "stop laughing. we only experience despair and depression -__-" 
+        await message.add_reaction("👍")     
         await message.channel.send(response5)
     if message.content.startswith('im bored'):
         embedVar = discord.Embed(title="Epicc Joke")
         quote = get_quote()
+        await message.add_reaction("👍")
         await message.channel.send(quote, embed=embedVar)
     if message.content.startswith('tell me a random name'):
         quote2 = get_quote_name()
+        await message.add_reaction("👍")
         await message.channel.send(quote2)
     if message.content.startswith('im sad'):
         embed1 = discord.Embed(title="Inspirational Quote")
         quote1 = get_quote()
+        await message.add_reaction("👍")
         await message.channel.send(quote1, embed=embed1)
     if message.content.startswith('meme'):
         def meme(ctx):
@@ -135,9 +151,11 @@ async def on_message(message):
         content = get("https://meme-api.herokuapp.com/gimme?Flags=nsfw=false").text
         data = json.loads(content,)
         meme = discord.Embed(title=f"{data['title']}", Color = discord.Color.random()).set_image(url=f"{data['url']}")
+        await message.add_reaction("👍")
         await message.channel.send(embed=meme)
     if message.content == 'tom tom':
         response9 = "https://tenor.com/view/tom-go-tom-gif-20838220"
+        await message.add_reaction("👍")
         await message.channel.send(response9)
     if message.content == '.help':
         embed=discord.Embed(title="List of commands", description="""
@@ -152,8 +170,15 @@ hai to insult people who are being nice
 niko + blah blah to get a response
 gamble to take a gamble
 more to come!!""")
+        await message.add_reaction("👍")
         await message.channel.send(embed=embed)
-
+    #if message.content == "Niko":
+     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+      #  await message.channel.send(embed=embed)
+    #if message.content == "niko":
+     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
+      #  await message.channel.send(embed=embed)
+        
 
 
         
@@ -182,29 +207,20 @@ more to come!!""")
     ]
 
     if message.content == 'phys':
-        response2 = random.choices_quotes = [
-        "what's so funny? i dont get it",
-        'hahaha funny',
-        'totally the funniest thing ever',
-        'whats the date?',
-        'do you know a monkey?',
-        'boring',
-        '...',
-        'do u have a brain? its not funny',
-        'smh so predictable',
-        'u suck',
-        'alr im done with this',
-        'u have no sense of humour',
-        'ok boomer',]
+        response2 = random.choice(physcis_quotes)
         await message.channel.send(response2)
+        await message.add_reaction("👍")
     if message.content == 'Phys':
         response2 = random.choice(physcis_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response2)    
     if message.content == 'Physics':
         response2 = random.choice(physcis_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response2)     
     if message.content == 'physics':
         response2 = random.choice(physcis_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response2) 
              
     if message.author == client.user:
@@ -229,6 +245,7 @@ more to come!!""")
 
     if message.content == 'XD':
         response3 = random.choice(xd_quotes_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response3)
     if message.author == client.user:
         return
@@ -255,15 +272,19 @@ more to come!!""")
 
     if message.content == 'lol':
         lolresponse = random.choice(lol_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(lolresponse)
     if message.content == 'LOL':
         lolresponse = random.choice(lol_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(lolresponse)
     if message.content == 'LMAO':
         lolresponse = random.choice(lol_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(lolresponse)
     if message.content == 'lmao':
         lolresponse = random.choice(lol_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(lolresponse)
     if message.author == client.user:
         return
@@ -290,31 +311,47 @@ more to come!!""")
 
     if message.content == 'ani':
         nameresponse = random.choice(name_quotes)
+        await message.add_reaction("👍") 
         await message.channel.send(nameresponse)
+               
     if message.content == 'Ani':
         nameresponse = random.choice(name_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(nameresponse)
+        
     if message.content == 'zingy':
         nameresponse = random.choice(name_quotes)
         await message.channel.send(nameresponse)
+        await message.add_reaction("👍")
     if message.content == 'Zingy':
         nameresponse = random.choice(name_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(nameresponse)
+        
     if message.content == 'Anirudh':
         nameresponse = random.choice(name_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(nameresponse)
+        
     if message.content == 'anirudh':
         nameresponse = random.choice(name_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(nameresponse)
+    
     if message.content == 'xd':
         response3 = random.choice(xd_quotes_quotes)
+        await message.add_reaction("👍")
         await message.channel.send(response3)
+        
     if message.content == 'xD':
         response3 = random.choice(xd_quotes_quotes)
+        await message.add_reaction("👍")  
         await message.channel.send(response3)   
     if message.content == 'XDD':
         response3 = random.choice(xd_quotes_quotes)
-        await message.channel.send(response3)           
+        await message.add_reaction("👍")  
+        await message.channel.send(response3) 
+        
     ping_quotes = [
         "DO U NOT HAVE ANYTHING ELSE TO DO? STOP PINGING",
         "GET OFF STOP BUGGING ME",
@@ -340,7 +377,9 @@ more to come!!""")
     
     if client.user.mentioned_in(message):
         response8 = random.choice(ping_quotes)
+        await message.add_reaction("👍") 
         await message.channel.send(response8)
+               
         
     gambling_quotes = [
         "yes",
@@ -363,8 +402,9 @@ more to come!!""")
     
     if message.content == 'gamble':
       response3 = random.choice(gambling_quotes)
+      await message.add_reaction("👍")
       await message.channel.send(response3)
-
+      
 
 CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
