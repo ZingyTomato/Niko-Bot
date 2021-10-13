@@ -516,6 +516,16 @@ async def iko(ctx, *,msgAI=None):
     url = requests.get('http://api.brainshop.ai/get?bid=APIKEY&key=KEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
     decode = json.loads(url.text)
     await ctx.send(decode['cnt'])
+  
+bot4 = commands.Bot(command_prefix='!')
+@bot4.command()
+@commands.guild_only()
+async def wallpaper(ctx, *,wall=None):
+    wall = wall or "Nature"
+    url = requests.get('https://pixabay.com/api/?key=APIKEYq='+wall)
+    decode = json.loads(url.text)
+    await ctx.send(decode['hits'][random.randint(0,19)]['largeImageURL'])
+  
 
 
 
@@ -523,6 +533,7 @@ async def iko(ctx, *,msgAI=None):
 loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
 loop.create_task(bot3.start('TOKEN'))
+loop.create_task(bot4.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
 loop.create_task(client3.start('TOKEN'))
