@@ -14,11 +14,6 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
-from neuralintents import GenericAssistant
-import h5py
-from discord import FFmpegPCMAudio
-from discord import TextChannel
-import  youtube_dl 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
