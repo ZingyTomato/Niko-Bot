@@ -14,8 +14,6 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
-from neuralintents import GenericAssistant
-import h5py
 from discord import Embed, Member
 from typing import Optional
 load_dotenv()
@@ -64,10 +62,10 @@ async def on_ready():
 async def on_ready(): 
     channel = client2.get_channel(767765551266398211) 
     await channel.send("I'm back online! Please wait for a few minutes while I get everything ready! If you are seeing this message repeatedly it means that my dumb owner, zingy :tomato: is constantly making changes.")
-#@client3.event
-#async def on_ready(): 
- #   channel = client3.get_channel(850251488339951627) 
-  #  await channel.send("Maintenance complete.")
+@client3.event
+async def on_ready(): 
+    channel = client3.get_channel(850251488339951627) 
+    await channel.send("Maintenance complete.")
 
 
 
@@ -172,13 +170,7 @@ gamble to take a gamble
 more to come!!""")
         await message.add_reaction("👍")
         await message.channel.send(embed=embed)
-    #if message.content == "Niko":
-     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-      #  await message.channel.send(embed=embed)
-    #if message.content == "niko":
-     #   embed=discord.Embed(description="Niko here :sunglasses: Sup. Property of grade 9")
-      #  await message.channel.send(embed=embed)
-        
+
 
 
         
