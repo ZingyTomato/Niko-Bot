@@ -61,7 +61,7 @@ async def on_ready():
 @client3.event
 async def on_ready(): 
     channel = client3.get_channel(850251488339951627) 
-    await channel.send("Maintenance complete.")
+    await channel.send("Why is nobody talking to me :( I'm sad :pepekms:")
 
 
 
@@ -378,6 +378,9 @@ more to come!!""")
         'https://tenor.com/view/rickroll-gif-22280972',
         'https://tenor.com/view/cute-cat-rick-roll-gif-22622972',
         'https://tenor.com/view/rickroll-yt-rewind-youtube-rewind-will-smith-prank-gif-21706791',
+        'https://tenor.com/view/rickroll-rick-astley-pupzyy-never-gonna-give-you-up-meme-gif-20503685',
+        'https://tenor.com/view/firefoxgaming-meme-rick-roll-rickrolled-kermit-gif-20211140',
+        'https://tenor.com/view/among-us-spongebob-meme-patrick-hates-rick-roll-nopeuwu-gif-gif-20458465',
                 
     ]
     
