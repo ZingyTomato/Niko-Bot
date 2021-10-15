@@ -416,7 +416,7 @@ CHANNEL_ID = 850251488339951627
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
-    await channel.send("O its monday its time for school. *wait we dont have school nwm*")
+    await channel.send("hahahah school in 2 days")
     
     
     random_quotes = [
@@ -527,7 +527,6 @@ async def wallpaper(ctx, *,wall=None):
     decode = json.loads(url.text)
     await ctx.send(decode['hits'][random.randint(0,19)]['largeImageURL'])
   
-
 
 
 
