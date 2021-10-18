@@ -530,6 +530,17 @@ async def wallpaper(ctx, *,wall=None):
     decode = json.loads(url.text)
     await ctx.send(decode['hits'][random.randint(0,19)]['largeImageURL'])
   
+bot5 = commands.Bot(command_prefix='!')
+@bot5.command()
+@commands.guild_only()
+async def news(ctx, *,new=None):
+    new = new or "Bitcoin"
+    url2 = requests.get('https://newsapi.org/v2/everything?q='+new+'&apiKey=APIKEY')
+    decode = json.loads(url2.text)
+    await ctx.send("**AUTHOR: **" + decode['articles'][random.randint(0,19)]['author'])
+    await ctx.send("**TITLE: **" + decode['articles'][random.randint(0,19)]['title'])
+    await ctx.send("**DESCRIPTION: **" + decode['articles'][random.randint(0,19)]['description'])
+    await ctx.send("**URL: **" + decode['articles'][random.randint(0,19)]['url'])
 
 
 
@@ -537,6 +548,7 @@ loop = asyncio.get_event_loop()
 loop.create_task(bot2.start('TOKEN'))
 loop.create_task(bot3.start('TOKEN'))
 loop.create_task(bot4.start('TOKEN'))
+loop.create_task(bot5.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
 loop.create_task(client3.start('TOKEN'))
