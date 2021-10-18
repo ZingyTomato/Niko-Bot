@@ -168,6 +168,7 @@ mention the creators name (if you know him/her/it) for some great insults
 !serverinfo to view info about the current server
 !kick + member to well... kick a member lol
 !wallpaper + blah blah to get a random wallpaper
+!news + topic to get the latest news
 more to come!!""")
         await message.add_reaction("👍")
         await message.channel.send(embed=embed)
