@@ -151,6 +151,10 @@ async def on_message(message):
         response9 = "https://tenor.com/view/tom-go-tom-gif-20838220"
         await message.add_reaction("👍")
         await message.channel.send(response9)
+    if message.content == 'ok':
+        response17 = "https://tenor.com/view/kinblood-ko-boxing-knock-out-gif-12154201"
+        await message.add_reaction("👍")
+        await message.channel.send(response17) 
     if message.content == '.help':
         embed=discord.Embed(title="List of commands", description="""
 .help to access this list again
