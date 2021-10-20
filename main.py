@@ -71,16 +71,16 @@ async def on_message(message):
         return
 
     hello_quotes = [
-        'get a life smh',
-        'uhhhh hi?',
-        'who asked you?',
-        'r u a :monkey:?',
+        'Get a life smh.',
+        'Uhhhh hi?',
+        'Who asked you?',
+        'Are u a :monkey:?',
         'https://tenor.com/view/flushed-rickroll-flushed-rickroll-never-gonna-gif-20255515',
-        'didnt ask g',
-        'ok who cares',
-        'more more',
-        'ahahhahahaahah',
-        'welcome to hell',
+        'Didnt ask g.',
+        'Okay who cares.',
+        'More more!',
+        'Ahahhahahaahah',
+        'Welcome to hell :smiling_imp:.',
         
     ]
     
@@ -157,26 +157,25 @@ async def on_message(message):
         await message.channel.send(response17) 
     if message.content == '.help':
         embed=discord.Embed(title="List of commands", description="""
-.help to access this list again
-meme to view some of the cringiest memes that you have ever seen (totally not NSFW)
-sus to well-
-phys to make fun of people who like physics
-im sad to see some inspirational quotes
-im bored to cheer yourself up
-fudge to see steven colbert hold a cake
-hai to insult people who are being nice
-niko + blah blah to get a response from an AI
-gamble to take a gamble
-tell me a random name to as the name suggests-
-mention the creators name (if you know him/her/it) for some great insults  
-!serverinfo to view info about the current server
-!kick + member to well... kick a member lol
-!wallpaper + blah blah to get a random wallpaper
-!news + topic to get the latest news
-more to come!!""")
+Type .help to access this list again.
+Type meme to view some of the cringiest memes that you have ever seen (totally not NSFW).
+Type sus to well-
+Type phys to make fun of people who like physics.
+Type im sad to see some inspirational quotes.
+Type im bored to cheer yourself up.
+Type fudge to see steven colbert hold a cake.
+Type hai to insult people who are being nice.
+Type niko + blah blah to get a response from an AI (It's very cool).
+Type gamble to take a gamble.
+Type tell me a random name to as the name suggests-
+Mention the creators name (if you know him/her/it) for some great insults.
+Type !serverinfo to view info about the current server.
+Type !kick + member to well... kick a member lol.
+Type !wallpaper + blah blah to get a random wallpaper.
+Type !news + topic to get the latest news.
+Have any another ideas? DM the **OG** Anirudh.""")
         await message.add_reaction("👍")
         await message.channel.send(embed=embed)
-
 
 
         
@@ -187,20 +186,20 @@ more to come!!""")
         return
 
     physcis_quotes = [
-        'lol nerd',
+        'Lol nerd.',
         ':fire:',
-        'who cares about physcis',
-        'f=ma',
-        'e=mc2. ur welcome :)',
-        'gosh ur such a nerd',
-        'lol chem better',
-        'flames everywhere',
-        'does it look lke i care?',
+        'Who cares about physics?',
+        'f=ma.',
+        'e=mc2. You are welcome :)',
+        'My gosh you are such a nerd.',
+        'Lol chemistry is better.',
+        'Flames everywhere!',
+        'Does it look lke i care?',
         'https://tenor.com/view/math-thinking-zach-galifianakis-formulas-numbers-gif-7715569',
-        'p = m x v yeah ik sooper smart',
-        'i personally feel that...',
-        'great the nerd is here',
-        'go away',
+        'p = m x v. Yeah I know super smart.',
+        'I personally feel that...',
+        'Great, the nerd is here!',
+        'Go away!',
         
     ]
 
@@ -249,22 +248,22 @@ more to come!!""")
         return
 
     lol_quotes = [
-        "what's so funny? i dont get it",
-        'hahaha funny',
-        'totally the funniest thing ever',
-        'whats the date?',
-        'do you know a monkey?',
-        'boring',
+        "Wha is so funny? I don't get it!",
+        'Hahaha funny.',
+        'Totally the funniest thing ever!',
+        'What is the date?',
+        'Do you know a monkey?',
+        'Boring.',
         '...',
-        'do u have a brain? its not funny',
-        'smh so predictable',
-        'u suck',
-        'alr im done with this',
-        'u have no sense of humour',
-        'ok boomer',
-        'wow ur so funny!',
-        'thats so funny wow!',
-        'sorry but i just dont care',
+        'Do you have a brain? It is not funny.',
+        'Shake my head so predictable.',
+        'You suck.',
+        'Alright I am done with this.',
+        'You have no sense of humour!',
+        'Okay boomer.',
+        'Wow you are so funny!',
+        'That is so funny wow!',
+        'Sorry but I just do not care.',
                 
     ]
 
@@ -285,38 +284,38 @@ more to come!!""")
         await message.add_reaction("👍")
         await message.channel.send(lolresponse)
     if message.content == '69':
-        await message.channel.send("Hhahha nice")
+        await message.channel.send("Ha nice.")
         await message.add_reaction("👌")
     if message.content == '420':
-        await message.channel.send("Hhahha nice")
+        await message.channel.send("Ha nice.")
         await message.add_reaction("👌")
     if message.content == '69420':
         await message.add_reaction("👌")
-        await message.channel.send("Hhahha nice")
+        await message.channel.send("Ha nice.")
     if message.content == 'pog':
         await message.add_reaction("👌")
-        await message.channel.send("pogchamp")
+        await message.channel.send("Pogchamp.")
 
     if message.author == client.user:
         return
 
     name_quotes = [
-        "yeah what about him?",
-        'He is my creator',
+        "Yeah what about him?",
+        'He is my creator.',
         'He programmed me.',
-        'pls no bully',
-        'hes amazing',
-        'lol he sux',
+        'Please do not bully.',
+        'He is amazing!',
+        'Lol he sucks.',
         '...',
-        'yea hes dumb.',
-        'i dont have much to say about him',
-        'hes weird',
-        'i dont really ike him',
-        'maybe hes your friend but he isnt mine',
-        'he a boomer',
-        'hahahaahha',
-        'hes damn annoying smh',
-        'sorry but i just dont care',
+        'Yea he is dumb.',
+        'I do not have much to say about him.',
+        'He is weird.',
+        'I do not really ike him.',
+        'Maybe he is your friend but he is not mine.',
+        'He is a boomer.',
+        'Ha.',
+        'He is damn annoying shake my head.',
+        'Sorry but I just do not care.',
                 
     ]
 
@@ -371,9 +370,9 @@ more to come!!""")
         "https://tenor.com/view/rick-roll-gif-22683806",
         'GET A LIFE STOP PINGING',
         'GO STUDY OR SMTH LEAVE ME ALONE',
-        'do u have a brain? its not funny',
+        'Do you have a brain? It is not funny.',
         '*deletes the server*',
-        'Whats ur problem mate',
+        'What is your problem mate?',
         '..',
         'https://tenor.com/view/rickroll-rick-roll-gif-19877831',
         'https://tenor.com/view/challenge-find-out-when-this-gif-ends-rickroll-rickrolled-hidden-rickroll-gif-22493495',
@@ -396,21 +395,21 @@ more to come!!""")
                
         
     gambling_quotes = [
-        "yes",
-        'no',
-        'maybe',
-        'whats the date?',
-        'idk',
-        'google it',
-        'ask your mom',
-        'im not telling',
-        'ask tom tom',
-        'follow the river and you will shiver',
-        'ok ok ok',
-        'why u askin me',
-        "i don't care enough to give an answer",
-        "dont bother me",
-        "bugger of man",
+        "Yes.",
+        'No.',
+        'Maybe.',
+        'What is the date?',
+        'I do not know.',
+        'Search it on duckduckgo.',
+        'Ask your mom.',
+        'I am not telling.',
+        'Ask tom tom.',
+        'Follow the river and you will shiver!',
+        'Ok ok ok.',
+        'Why are you asking me?',
+        "I don't care enough to give an answer.",
+        "Don't bother me.",
+        "Bugger of man.",
                 
     ]
     
@@ -420,60 +419,74 @@ more to come!!""")
       await message.channel.send(response3)
       
 
-CHANNEL_ID = 850251488339951627
+CHANNEL_ID = 850247048636137509
 @aiocron.crontab('0 8 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
-    await channel.send("hahahah school in 2 days")
+    await channel.send("Yes, Thursday. Fun.")
     
     
     random_quotes = [
-        "Haha",
+        "Haha.",
         'Ever wondered what the meaning of life is?',
-        'What did u have for breakfast',
+        'What did u have for breakfast?',
         'Did you see the US Open?',
-        'Whoever is ^ me will be banned',
-        'boring',
+        'Whoever is ^ me will be banned *Hope it is not me which reveals how dead this chat is.*',
+        'Boring.',
         '...',
-        'Tbh what am I doing at this point',
+        'To be honest what am I doing at this point.',
         'Did you know that-',
-        "Is the week over yet? I can't take it anymore",
-        'alr im done with this',
-        'im losing my mind stop-',
-        'all systems operational',
-        'boooooringgg',
-        'is anybody here or am i just talking to myself?',
-        'can you bring food to the psat exam?',
-        'im hungry',
+        "Is the week over yet? I can't take it anymore.",
+        'Alright I am done with this.',
+        'I am losing my mind stop-',
+        'All systems operational!',
+        'Boooooringgg.',
+        'Is anybody here or am i just talking to myself?',
+        'Can you bring food to the psat exam?',
+        'I am hungry!',
    ]
 CHANNEL_ID = 850251488339951627
-@aiocron.crontab('0 */3 * * *')
+@aiocron.crontab('0 */4 * * *')
 async def cornjob1():
     channel = client.get_channel(CHANNEL_ID)
     responserandom = random.choice([
-        "Haha",
+        "Haha.",
         'Ever wondered what the meaning of life is?',
         'What did u have for breakfast',
         'Did you see the US Open?',
-        'Whoever is ^ me will be banned',
-        'boring',
+        'Whoever is ^ me will be banned!',
+        'Boring.',
         '...',
-        'Tbh what am I doing at this point',
+        'To be honest what am I doing at this point?',
         'Did you know that-',
-        "Is the week over yet? I can't take it anymore",
-        'alr im done with this',
-        'im losing my mind stop-',
-        'all systems operational',
-        'find these messages annoying?',
-        'anybody saw squid game or whatever its called',
-        'guess what i get to annoy you more often now',
-        'is anybody here or am i just talking to myself?',
-        'can you bring food to the psat exam?',
-        'hahah eot in just 2 months your welcome',
+        "Is the week over yet? I can't take it anymore!",
+        'Alright I am done with this!',
+        'I am losing my mind stop-',
+        'All systems operational!',
+        'Find these messages annoying?',
+        'Anybody saw squid game or whatever its called?',
+        'Guess what i get to annoy you more often now!',
+        'Is anybody here or am I just talking to myself?',
+        'Can you bring food to the psat exam?',
+        'Hahah eot in just 2 months you are welcome.',
         
     
     ])
     await channel.send(responserandom)   
+
+CHANNEL_ID2 = 850247048636137509
+@aiocron.crontab('0 12 * * *')
+async def cornjob1():
+    channel = client.get_channel(CHANNEL_ID2)
+    responserandom3 = random.choice([
+        "Imagine being in real life school!",
+        "I do not go to school if that was not already obvious.",
+        "I live in a server on a computer."
+
+
+    ])
+    await channel.send(responserandom3)
+
      
     
 
@@ -487,7 +500,7 @@ bot2 = commands.Bot(command_prefix='!')
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
-  await ctx.send(f"{user} has been kicked lol what a wimp =/")
+  await ctx.send(f"{user} has been kicked aw shucks!")
 
 @bot2.command()
 async def serverinfo(ctx):
