@@ -224,19 +224,19 @@ Have any another ideas? DM the **OG** Anirudh.""")
         return
 
     xd_quotes_quotes = [
-        "what's so funny? i dont get it",
-        'hahaha funny',
-        'totally the funniest thing ever',
-        'whats the date?',
-        'do you know a monkey?',
-        'boring',
+        "What is so funny? I do not get it!",
+        'Hahaha funny.',
+        'Totally the funniest thing ever!',
+        'What is the date?',
+        'Do you know a monkey?',
+        'Boring.',
         '...',
-        'do u have a brain? its not funny',
-        'smh so predictable',
-        'u suck',
-        'alr im done with this',
-        'u have no sense of humour',
-        'ok boomer',
+        'Do u have a brain? It is not funny.',
+        'Shake my head so predictable.',
+        'You suck.',
+        'Alright I am done with this.',
+        'You have no sense of humour.',
+        'Okay boomer.',
                 
     ]
 
@@ -248,7 +248,7 @@ Have any another ideas? DM the **OG** Anirudh.""")
         return
 
     lol_quotes = [
-        "Wha is so funny? I don't get it!",
+        "What is so funny? I don't get it!",
         'Hahaha funny.',
         'Totally the funniest thing ever!',
         'What is the date?',
@@ -560,6 +560,14 @@ async def news(ctx, *,new=None):
     await ctx.send("**DESCRIPTION: **" + decode['articles'][random.randint(0,19)]['description'])
     await ctx.send("**URL: **" + decode['articles'][random.randint(0,19)]['url'])
 
+bot6 = commands.Bot(command_prefix='!')
+@bot6.command()
+@commands.guild_only()
+async def advice(ctx):
+    url = requests.get('https://api.adviceslip.com/advice')
+    decode = json.loads(url.text)
+    await ctx.send(decode['slip']['advice'])
+
 
 
 loop = asyncio.get_event_loop()
@@ -567,6 +575,7 @@ loop.create_task(bot2.start('TOKEN'))
 loop.create_task(bot3.start('TOKEN'))
 loop.create_task(bot4.start('TOKEN'))
 loop.create_task(bot5.start('TOKEN'))
+loop.create_task(bot6.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
 loop.create_task(client3.start('TOKEN'))
