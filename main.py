@@ -12,6 +12,7 @@ import aiohttp
 from requests import get
 import aiocron
 from discord.ext.commands import Bot
+from googlesearch import search 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -567,6 +568,15 @@ async def advice(ctx):
     url = requests.get('https://api.adviceslip.com/advice')
     decode = json.loads(url.text)
     await ctx.send(decode['slip']['advice'])
+    
+bot8 = commands.Bot(command_prefix='.')
+@bot8.command()
+async def find(ctx,*, query):
+		author = ctx.author.mention
+		await ctx.channel.send(f"Scraping the internet... {author} ")
+		async with ctx.typing():
+				for j in search(query, tld="co.in", num=1, stop=1, pause=2): 
+						await ctx.send(f"Here you go! : {j}")
 
 
 
@@ -576,6 +586,7 @@ loop.create_task(bot3.start('TOKEN'))
 loop.create_task(bot4.start('TOKEN'))
 loop.create_task(bot5.start('TOKEN'))
 loop.create_task(bot6.start('TOKEN'))
+loop.create_task(bot8.start('TOKEN'))
 loop.create_task(client.start('TOKEN'))
 loop.create_task(client2.start('TOKEN'))
 loop.create_task(client3.start('TOKEN'))
