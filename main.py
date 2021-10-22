@@ -501,8 +501,11 @@ bot2 = commands.Bot(command_prefix='!')
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
-  await ctx.send(f"{user} has been kicked aw shucks!")
-
+  async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
+     await ctx.send(f"{user} has been kicked aw shucks!")
+    
 @bot2.command()
 async def serverinfo(ctx):
   name = str(ctx.guild.name)
@@ -525,8 +528,10 @@ async def serverinfo(ctx):
   embed.add_field(name="Server ID", value=id, inline=True)
   embed.add_field(name="Region", value=region, inline=True)
   embed.add_field(name="Member Count", value=memberCount, inline=True)
-
-  await ctx.send(embed=embed)
+  async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
+     await ctx.send(embed=embed)
   
 
 
@@ -536,19 +541,28 @@ bot3 = commands.Bot(command_prefix='n')
 @commands.guild_only()
 async def iko(ctx, *,msgAI=None):
     msgAI = msgAI or 'Hi'
-    url = requests.get('http://api.brainshop.ai/get?bid=APIKEY&key=KEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
+    url = requests.get('http://api.brainshop.ai/get?bid=BID&key=APIKEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
     decode = json.loads(url.text)
-    await ctx.send(decode['cnt'])
-  
+    async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
+     await ctx.send(decode['cnt'])
+    
+    
+    
+    
 bot4 = commands.Bot(command_prefix='!')
 @bot4.command()
 @commands.guild_only()
 async def wallpaper(ctx, *,wall=None):
     wall = wall or "Nature"
-    url = requests.get('https://pixabay.com/api/?key=APIKEYq='+wall)
+    url = requests.get('https://pixabay.com/api/?key=APIKEY&q='+wall)
     decode = json.loads(url.text)
-    await ctx.send(decode['hits'][random.randint(0,19)]['largeImageURL'])
-  
+    async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
+     await ctx.send(decode['hits'][random.randint(0,19)]['largeImageURL'])
+
 bot5 = commands.Bot(command_prefix='!')
 @bot5.command()
 @commands.guild_only()
@@ -556,19 +570,25 @@ async def news(ctx, *,new=None):
     new = new or "Bitcoin"
     url2 = requests.get('https://newsapi.org/v2/everything?q='+new+'&apiKey=APIKEY')
     decode = json.loads(url2.text)
+    async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
     await ctx.send("**AUTHOR: **" + decode['articles'][random.randint(0,19)]['author'])
     await ctx.send("**TITLE: **" + decode['articles'][random.randint(0,19)]['title'])
     await ctx.send("**DESCRIPTION: **" + decode['articles'][random.randint(0,19)]['description'])
     await ctx.send("**URL: **" + decode['articles'][random.randint(0,19)]['url'])
-
+  
 bot6 = commands.Bot(command_prefix='!')
 @bot6.command()
 @commands.guild_only()
 async def advice(ctx):
     url = requests.get('https://api.adviceslip.com/advice')
     decode = json.loads(url.text)
-    await ctx.send(decode['slip']['advice'])
-    
+    async with ctx.typing():
+     type_time = random.uniform(0.5, 2)
+     await asyncio.sleep(type_time)
+     await ctx.send(decode['slip']['advice'])
+ 
 bot8 = commands.Bot(command_prefix='.')
 @bot8.command()
 async def find(ctx,*, query):
@@ -577,6 +597,7 @@ async def find(ctx,*, query):
 		async with ctx.typing():
 				for j in search(query, tld="co.in", num=1, stop=1, pause=2): 
 						await ctx.send(f"Here you go! : {j}")
+				
 
 
 
