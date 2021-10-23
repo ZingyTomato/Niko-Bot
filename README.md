@@ -14,7 +14,7 @@ git clone https://github.com/ZingyTomato/Niko-Bot.git && cd Niko-Bot
 <br>
 <h2>Install Required Packages</h2>
 
-`pip3 install -r requirements.txt`
+`pip3 install discord.py requests aiocron h5py python_dotenv asyncio google`
 <br>
 <h2> Discord Token </h2>
 
