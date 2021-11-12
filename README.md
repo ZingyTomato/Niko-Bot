@@ -1,5 +1,5 @@
 # Niko-Bot
-A fully featured open source discord bot. 
+Niko is an open source Discord bot. Designed to add a little spice, sarcasm and jokes to your server :)
 
 # List of commands
 **.Help**
