@@ -1,5 +1,83 @@
 # Niko-Bot
-A work in progress discord bot. Does everything from memes to a chatbot.
+A fully featured open source discord bot. 
+
+# List of commands
+**.Help**
+<br>
+Access a list of all commands.
+<br>
+<br>
+**.meme**
+<br>
+Experience some epic memes.
+<br>
+<br>
+**.niko**
+<br>
+Chat with Niko. Example usage - .niko + your query
+<br>
+<br>
+**.info**
+<br>
+View some information about me.
+<br>
+<br>
+**.serverinfo**
+<br>
+See the statistics of your server.
+<br>
+<br>
+**.wallpaper**
+<br>
+See a wallpaper based on your search. Example usage - .wallpaper + your query
+<br>
+<br>
+**.ping**
+<br>
+Usually used for maintenance purposes.
+<br>
+<br>
+**.kick**
+<br>
+Kick a member. Example usage - .kick + member
+<br>
+<br>
+**.ban**
+<br>
+Ban a member. Example usage - .ban + member
+<br>
+<br>
+**.unban**
+<br>
+Unban a member. Example usage - .unban + member
+<br>
+<br>
+**.news**
+<br>
+See the latest news on your desired topic. Example usage - .news + your query
+<br>
+<br>
+**.find**
+<br>
+Search the internet for quick facts/information.
+<br>
+<br>
+**.advice**
+<br>
+Recieve advice from a robot.
+<br>
+<br>
+**.weather**
+<br>
+See the weather from any city. Example usage - .weather + your city
+<br>
+<br>
+**.calc**
+<br>
+Use a calculator to calculate things like 65 + 4
+
+
+
 
 Invite Link : `https://discord.com/api/oauth2/authorize?client_id=890816070322098197&permissions=534991339334&scope=bot`
 
