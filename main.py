@@ -28,10 +28,19 @@ DiscordComponents(client)
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='.Help'))
+    
+# Global cooldowm
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        embed=discord.Embed(title="Spammer detected!",description = f'Whoa whoa slow it down there buckaroo! You can execute this command in exactly {round(error.retry_after, 2)} seconds!',color = discord.Color.blue())
+        await ctx.reply(embed=embed)
 
 # Info command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def info(ctx):
    embed=discord.Embed(title="Hey there! I'm Niko 2.0, the next generation Niko.",description="Here's a few questions about me answered.",color =   discord.Colour.red(), inline = False)
    embed.add_field(name = "Who am I?", value = """I am a more efficient and a complete rewrite (kind of) of the original Niko that you all know and "love".""", inline = False)
@@ -45,6 +54,7 @@ async def info(ctx):
 # Meme command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def meme(ctx):
     content = get("https://meme-api.herokuapp.com/gimme?Flags=nsfw=false").text
     data = json.loads(content,)
@@ -55,6 +65,7 @@ async def meme(ctx):
 # Help command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def Help(ctx):
    embed=discord.Embed(title="Help Center",description="Here's a list of all my commands.",color = discord.Colour.green())
    embed.add_field(name = ".Help", value = "Access a list of all commands.")
@@ -89,6 +100,7 @@ async def Help(ctx):
 format = "%a, %d %b %Y | %H:%M:%S %ZIST"
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def serverinfo(ctx):
     embed = discord.Embed(
         color = discord.Color.purple()
@@ -111,6 +123,7 @@ async def serverinfo(ctx):
 # AI chatbot command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def niko(ctx, *,msgAI=None):
     msgAI = msgAI or 'Hi'
     url = requests.get('http://api.brainshop.ai/get?bid=160296&key=APIKEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
@@ -121,6 +134,7 @@ async def niko(ctx, *,msgAI=None):
 # Wallpaper command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
 async def wallpaper(ctx, *,wall=None):
     wall = wall or "Nature"
@@ -133,6 +147,7 @@ async def wallpaper(ctx, *,wall=None):
 # Ping command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def ping(ctx):
         embed=discord.Embed(title="Ping results",color = discord.Colour.blue())
         embed.add_field(name = "Bot Latency (Under 500 is good)", value = f"{round(client.latency * 1000)}ms")
@@ -142,6 +157,7 @@ async def ping(ctx):
 # Kick command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, reason=None):
   await ctx.guild.kick(user)
@@ -152,6 +168,7 @@ async def kick(ctx, user: discord.Member, *, reason=None):
 # Ban command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.has_permissions(ban_members = True)
 async def ban(ctx,member : discord.Member,*,reason="No reason provided!"):
     embed=discord.Embed(title="Member banned",description = f"{member.name} has been banned!", color=discord.Colour.red())
@@ -162,6 +179,7 @@ async def ban(ctx,member : discord.Member,*,reason="No reason provided!"):
 # Unban command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.has_permissions(ban_members=True)
 async def unban(ctx,*,member):
     banned_users = await ctx.guild.bans()
@@ -205,6 +223,7 @@ async def on_command_error(ctx, error):
 # News command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
 async def news(ctx, *,new=None):
     new = new or "Bitcoin"
@@ -220,6 +239,7 @@ async def news(ctx, *,new=None):
 # Search command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def find(ctx,*, query):
     for j in search(query, tld="co.in", num=1, stop=1, pause=2):
         embed=discord.Embed(title="Results from the internet")
@@ -231,6 +251,7 @@ async def find(ctx,*, query):
 # Advice command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
 async def advice(ctx):
     url = requests.get('https://api.adviceslip.com/advice')
@@ -242,6 +263,7 @@ async def advice(ctx):
 # Weather command
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
 async def weather(ctx, *,weath=None):
     weath = weath or "Bangalore"
@@ -301,6 +323,7 @@ def calculate(exp):
 # Execute calculator
 
 @client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
 async def calc(ctx):
     m = await ctx.send(content='Loading Calculators...')
     expression = 'None'
