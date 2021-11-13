@@ -250,7 +250,7 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Member not found!",description = "My systems have detected that you have entered an invalid member name.", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-        
+
 @kick.error
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
