@@ -36,6 +36,24 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         embed=discord.Embed(title="Spammer detected!",description = f'Whoa whoa slow it down there buckaroo! You can execute this command in exactly {round(error.retry_after, 2)} seconds!',color = discord.Color.blue())
         await ctx.reply(embed=embed)
+        
+ # Logging
+
+@client.event
+async def on_message_delete(message):
+    embed = discord.Embed(title=f"{message.author.name} has deleted a message! What is he hiding?", color=discord.Colour.red())
+    embed.add_field(name = "Deleted Message", value = f"{message.content}", inline = False)
+    channel = client.get_channel(908934542398722088)
+    await channel.send(embed=embed)
+
+@client.event
+async def on_message_edit(message_before, message_after):
+    embed= discord.Embed(title=f"{message_before.author.name} has edited a message! Caught you red handed.", color=discord.Colour.green())
+    embed.add_field(name = "Message Before Edit", value = f"{message_before.content}", inline = False)
+    embed.add_field(name = "Edited Message", value = f"{message_after.content}", inline = False)
+    channel = client.get_channel(908934542398722088)
+    await channel.send(embed=embed)
+
 
 # Info command
 
