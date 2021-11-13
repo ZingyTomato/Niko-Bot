@@ -55,6 +55,28 @@ async def on_message_edit(message_before, message_after):
     channel = discord.utils.get(client.get_all_channels(), name="logs")
     await channel.send(embed=embed)
 
+# Slowmode command
+
+@client.command()
+@commands.has_permissions(manage_messages=True)
+@commands.cooldown(3, 15, commands.BucketType.user)
+async def slowmode(ctx,time:int):
+    try:
+        if time == 0:
+            embed= discord.Embed(title="Slowmode turned off!", description="Slowmode has been set to 0.", color=discord.Colour.blue())
+            await ctx.channel.edit(slowmode_delay = 0)
+            await ctx.reply(embed=embed)
+        elif time > 21600:
+            embed= discord.Embed(title="Slowmode limit passed!", description="You can't set the slowmode to be higher than 6 hours dumb dumb.", color=discord.Colour.blue())
+            await ctx.reply(embed=embed)
+            return
+        else:
+            await ctx.channel.edit(slowmode_delay = time)
+            embed= discord.Embed(title="Slowmode changed!", description=f"Slowmode is now {time} seconds!", color=discord.Colour.green())
+            await ctx.reply(embed=embed)
+    except Exception:
+        await print("Uh something went wrong.")
+
 
 # Info command
 
@@ -228,9 +250,7 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Member not found!",description = "My systems have detected that you have entered an invalid member name.", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-
-
-
+        
 @kick.error
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
@@ -249,6 +269,13 @@ async def on_command_error(ctx, error):
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
 
+@slowmode.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        embed=discord.Embed(title="Insufficient Permissions!",description = f"Don't be a doofus! You don't have the right permissions. Permissions needed {error.missing_perms}", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+        
 # News command
 
 @client.command()
