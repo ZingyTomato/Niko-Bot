@@ -37,6 +37,73 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Spammer detected!",description = f'Whoa whoa slow it down there buckaroo! You can execute this command in exactly {round(error.retry_after, 2)} seconds!',color = discord.Color.blue())
         await ctx.reply(embed=embed)
         
+# Leveling System
+
+@client.event
+async def on_member_join(member):
+    with open('users.json', 'r') as f:
+        users = json.load(f)
+
+    await update_data(users, member)
+
+    with open('users.json', 'w') as f:
+        json.dump(users, f, indent=4)
+
+@client.event
+async def on_message(message):
+    if message.author.bot == False:
+        with open('users.json' , 'r') as f:
+            users = json.load(f)
+
+        await update_data(users, message.author)
+        await add_experience(users, message.author, random.randint(1,5))
+        await level_up(users, message.author, message)
+
+        with open('users.json', 'w') as f:
+            json.dump(users, f, indent=4)
+    await client.process_commands(message)
+
+# Update user data for leveling system
+
+async def update_data(users, user):
+    if not f'{user.id}' in users:
+        users[f'{user.id}'] = {}
+        users[f'{user.id}']['experience'] = 0
+        users[f'{user.id}']['level'] = 0
+
+async def add_experience(users, user, exp):
+    users[f'{user.id}']['experience'] += exp
+
+async def level_up(users, user, message):
+    with open('levels.json', 'r') as g:
+        levels = json.load(g)
+    experience = users[f'{user.id}']['experience']
+    lvl_start = users[f'{user.id}']['level']
+    lvl_end = int(experience ** (1/4))
+    if lvl_start < lvl_end:
+        embed=discord.Embed(title="Level up!", description=f"{user.mention} has leveled up to level {lvl_end}!!", color = discord.Color.green())
+        await message.channel.send(embed=embed)
+        users[f"{user.id}"]['level'] = lvl_end
+
+# Check level
+
+@client.command()
+@commands.cooldown(3, 15, commands.BucketType.user)
+async def level(ctx, member: discord.Member = None):
+    if not member:
+        id = ctx.message.author.id
+        with open('users.json', 'r') as f:
+            users = json.load(f)
+            lvl = users[str(id)]['level']
+            embed=discord.Embed(title="Your current level", description=f"You are at level {lvl}!", color=discord.Colour.green())
+            await ctx.reply(embed=embed)
+    else:
+        id = member.id
+        with open('users.json', 'r') as f:
+            users = json.load(f)
+            lvl = users[str(id)]['level']
+            embed=discord.Embed(title="Your current level", description=f"{member} is now at level {lvl}!", color=discord.Colour.green())
+            await ctx.reply(embed=embed)        
 
 # Logging
 
