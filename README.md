@@ -75,9 +75,17 @@ See the weather from any city. Example usage - .weather + your city
 **.calc**
 <br>
 Use a calculator to calculate things like 65 + 4
-
-
-
+<br>
+<br>
+**.slowmode**
+<br>
+Set the slowmode to your desired limit. Example usage - .slowmode 69
+<br>
+<br>
+**.level**
+<br>
+See what level you are on.
+<br>
 
 Invite Link : `https://discord.com/api/oauth2/authorize?client_id=890816070322098197&permissions=534991339334&scope=bot`
 
