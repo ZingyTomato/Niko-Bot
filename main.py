@@ -304,7 +304,47 @@ async def unban(ctx,*,member):
     embed=discord.Embed(title="Member not found",description = f"{member} was not found!", color=discord.Colour.green())
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
+  
+# News command
 
+@client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
+@commands.guild_only()
+async def news(ctx, *,new=None):
+    new = new or "Bitcoin"
+    url2 = requests.get('https://newsapi.org/v2/everything?q='+new+'&apiKey=APIKEY')
+    decode = json.loads(url2.text)
+    embed=discord.Embed(title=f"{decode['articles'][random.randint(0,19)]['title']}",color=discord.Colour.teal())
+    embed.add_field(name = "Author", value = f"{decode['articles'][random.randint(0,19)]['author']}", inline = False)
+    embed.add_field(name = "Description", value = f"{decode['articles'][random.randint(0,19)]['description']}", inline = False)
+    embed.add_field(name = "Url", value = f"{decode['articles'][random.randint(0,19)]['url']}", inline = False)
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+    await ctx.reply(embed=embed)
+
+# Search command
+
+@client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
+async def find(ctx,*, query):
+    for j in search(query, tld="co.in", num=1, stop=1, pause=2):
+        embed=discord.Embed(title="Results from the internet")
+        embed.add_field(name = "Top result", value = f"{j}")
+        embed.set_thumbnail(url = f"{j}")
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+        
+# Weather command
+
+@client.command()
+@commands.cooldown(3, 4, commands.BucketType.user)
+@commands.guild_only()
+async def weather(ctx, *,weath=None):
+    weath = weath or "Bangalore"
+    url = requests.get('https://api.openweathermap.org/data/2.5/weather?q='+weath+'&appid=APIKEY')
+    decode = json.loads(url.text)
+    embed=discord.Embed(title=f"{decode['weather'][0]['main']}", description=f"{decode['weather'][0]['description']}")
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+    await ctx.reply(embed=embed)
 # Check if user has permissions
 
 @ban.error
@@ -321,8 +361,7 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Member name not found!",description = "Please enter a members name! For example : **.ban Zingytomato#0604**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-
-
+        
 @kick.error
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
@@ -359,35 +398,35 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Duration not found!",description = "Please enter a specific time! For example : **.slowmode 69**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-        
-# News command
 
-@client.command()
-@commands.cooldown(3, 4, commands.BucketType.user)
-@commands.guild_only()
-async def news(ctx, *,new=None):
-    new = new or "Bitcoin"
-    url2 = requests.get('https://newsapi.org/v2/everything?q='+new+'&apiKey=APIKEY')
-    decode = json.loads(url2.text)
-    embed=discord.Embed(title=f"{decode['articles'][random.randint(0,19)]['title']}",color=discord.Colour.teal())
-    embed.add_field(name = "Author", value = f"{decode['articles'][random.randint(0,19)]['author']}", inline = False)
-    embed.add_field(name = "Description", value = f"{decode['articles'][random.randint(0,19)]['description']}", inline = False)
-    embed.add_field(name = "Url", value = f"{decode['articles'][random.randint(0,19)]['url']}", inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
-    await ctx.reply(embed=embed)
-
-# Search command
-
-@client.command()
-@commands.cooldown(3, 4, commands.BucketType.user)
-async def find(ctx,*, query):
-    for j in search(query, tld="co.in", num=1, stop=1, pause=2):
-        embed=discord.Embed(title="Results from the internet")
-        embed.add_field(name = "Top result", value = f"{j}")
-        embed.set_thumbnail(url = f"{j}")
+@wallpaper.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Wallpaper not found! ",description = "Please enter a wallpaper to search for! For example : **.wallpaper nature**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
 
+@news.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="News article not found! ",description = "Please enter a topic to search for! For example : **.news Discord**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
+@find.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Search query not found! ",description = "Please enter a search query! For example : **.find Discord**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
+@weather.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="City not found! ",description = "Please enter a city! For example : **.weather Bangalore**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+       
 # Advice command
 
 @client.command()
@@ -397,19 +436,6 @@ async def advice(ctx):
     url = requests.get('https://api.adviceslip.com/advice')
     decode = json.loads(url.text)
     embed=discord.Embed(title="Your advice", description=f"{decode['slip']['advice']}", color = discord.Color.purple())
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
-    await ctx.reply(embed=embed)
-
-# Weather command
-
-@client.command()
-@commands.cooldown(3, 4, commands.BucketType.user)
-@commands.guild_only()
-async def weather(ctx, *,weath=None):
-    weath = weath or "Bangalore"
-    url = requests.get('https://api.openweathermap.org/data/2.5/weather?q='+weath+'&appid=APIKEY')
-    decode = json.loads(url.text)
-    embed=discord.Embed(title=f"{decode['weather'][0]['main']}", description=f"{decode['weather'][0]['description']}")
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
 
