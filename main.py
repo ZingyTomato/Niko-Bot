@@ -20,14 +20,14 @@ intents.members = True
 
 # Define client prefix
 
-client = commands.Bot(command_prefix = '.', intents=intents)
+client = commands.Bot(command_prefix = '.', intents=intents, help_command=None)
 DiscordComponents(client)
 
 # Set discord bot status
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='.Help'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='.help'))
     
 # Global cooldowm
 
@@ -176,7 +176,7 @@ async def meme(ctx):
 @commands.cooldown(3, 4, commands.BucketType.user)
 async def Help(ctx):
    embed=discord.Embed(title="Help Center",description="Here's a list of all my commands.",color = discord.Colour.green())
-   embed.add_field(name = ".Help", value = "Access a list of all commands.")
+   embed.add_field(name = ".help", value = "Access a list of all commands.")
    embed.add_field(name = ".meme", value = "Experience some epic memes.")
    embed.add_field(name = ".niko", value = """Chat with Niko. Example usage - ** .niko + your query**""")
    embed.add_field(name = ".info", value = "View some information about me.")
@@ -232,8 +232,7 @@ async def serverinfo(ctx):
 
 @client.command()
 @commands.cooldown(3, 4, commands.BucketType.user)
-async def niko(ctx, *,msgAI=None):
-    msgAI = msgAI or 'Hi'
+async def niko(ctx, *,msgAI):
     url = requests.get('http://api.brainshop.ai/get?bid=160296&key=APIKEY&uid=['+str(ctx.author.id)+']&msg='+msgAI)
     decode = json.loads(url.text)
     embed=discord.Embed(description = f"{decode['cnt']}")
@@ -244,8 +243,7 @@ async def niko(ctx, *,msgAI=None):
 @client.command()
 @commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
-async def wallpaper(ctx, *,wall=None):
-    wall = wall or "Nature"
+async def wallpaper(ctx, *,wall):
     url = requests.get('https://pixabay.com/api/?key=APIKEY&q='+wall)
     decode = json.loads(url.text)
     embed=discord.Embed(title=f"Results for {wall}",color=discord.Color.orange()).set_image(url=f"{decode['hits'][random.randint(0,19)]['largeImageURL']}")
@@ -310,8 +308,7 @@ async def unban(ctx,*,member):
 @client.command()
 @commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
-async def news(ctx, *,new=None):
-    new = new or "Bitcoin"
+async def news(ctx, *,new):
     url2 = requests.get('https://newsapi.org/v2/everything?q='+new+'&apiKey=APIKEY')
     decode = json.loads(url2.text)
     embed=discord.Embed(title=f"{decode['articles'][random.randint(0,19)]['title']}",color=discord.Colour.teal())
@@ -338,14 +335,14 @@ async def find(ctx,*, query):
 @client.command()
 @commands.cooldown(3, 4, commands.BucketType.user)
 @commands.guild_only()
-async def weather(ctx, *,weath=None):
-    weath = weath or "Bangalore"
+async def weather(ctx, *,weath):
     url = requests.get('https://api.openweathermap.org/data/2.5/weather?q='+weath+'&appid=APIKEY')
     decode = json.loads(url.text)
     embed=discord.Embed(title=f"{decode['weather'][0]['main']}", description=f"{decode['weather'][0]['description']}")
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
-# Check if user has permissions
+
+# Error handling
 
 @ban.error
 async def on_command_error(ctx, error):
@@ -426,7 +423,21 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="City not found! ",description = "Please enter a city! For example : **.weather Bangalore**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-       
+@niko.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Phrase not found! ",description = "Please enter a phrase to talk with Niko! For example : **.niko do you like TISB?**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.errors.CommandNotFound):
+        embed=discord.Embed(title="Command not found! ",description = "My systems have detected that you have entered an invalid command!", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+      
+ 
 # Advice command
 
 @client.command()
@@ -439,7 +450,7 @@ async def advice(ctx):
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
 
-# Calcultor
+# Calculator
 
 # Define buttons
 
