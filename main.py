@@ -317,6 +317,11 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Member not found!",description = "My systems have detected that you have entered an invalid member name.", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Member name not found!",description = "Please enter a members name! For example : **.ban Zingytomato#0604**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
 
 @kick.error
 async def on_command_error(ctx, error):
@@ -328,6 +333,10 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Member not found!",description = "My systems have detected that you have entered an invalid member name.", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Member name not found!",description = "Please enter a members name! For example : **.kick Zingytomato#0604**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
 
 @unban.error
 async def on_command_error(ctx, error):
@@ -335,11 +344,19 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Insufficient Permissions!",description = f"Don't be a doofus! You don't have the right permissions. Permissions needed {error.missing_perms}", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Member name not found!",description = "Please enter a members name! For example : **.unban Zingytomato#0604**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
 
 @slowmode.error
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         embed=discord.Embed(title="Insufficient Permissions!",description = f"Don't be a doofus! You don't have the right permissions. Permissions needed {error.missing_perms}", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Duration not found!",description = "Please enter a specific time! For example : **.slowmode 69**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
         
