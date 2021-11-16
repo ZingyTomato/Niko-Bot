@@ -426,7 +426,7 @@ async def on_command_error(ctx, error):
 @niko.error
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        embed=discord.Embed(title="Phrase not found! ",description = "Please enter a phrase to talk with Niko! For example : **.niko do you like TISB?**", color=discord.Colour.red())
+        embed=discord.Embed(title="Phrase not found! ",description = "Please enter a phrase to talk with Niko! For example : **.niko do you like School?**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
 
