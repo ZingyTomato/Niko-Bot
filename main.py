@@ -12,6 +12,7 @@ from googlesearch import search
 import aiohttp
 from discord_components import *
 import datetime
+import DiscordUtils
 
 # Enable intents
 
@@ -22,6 +23,10 @@ intents.members = True
 
 client = commands.Bot(command_prefix = '.', intents=intents, help_command=None)
 DiscordComponents(client)
+
+# Define music for music command
+
+music = DiscordUtils.Music()
 
 # Set discord bot status
 
@@ -196,6 +201,15 @@ async def Help(ctx):
    embed.add_field(name = ".advice", value = "Recieve advice from a robot.")
    embed.add_field(name = ".weather", value = "See the weather from any city. Example usage -  **.weather + your city**")
    embed.add_field(name = ".calc", value = "Use a calculator to calculate things like **65 + 4**")
+   embed.add_field(name = ".slowmode", value = "Change the slowmode to your desired value.")
+   embed.add_field(name = ".level", value = "Check your level and flex on others.")
+   embed.add_field(name = ".join", value = "Allow niko to join a VC.")
+   embed.add_field(name = ".leave", value = "Allow niko to leave a VC.")
+   embed.add_field(name = ".play", value = "Play a song of your choice using a youtube video's URL.")
+   embed.add_field(name = ".pause", value = "Pause the song.")
+   embed.add_field(name = ".resume", value = "Resume the song.")
+   embed.add_field(name = ".queue", value = "View the queue for upcoming songs.")
+   embed.add_field(name = ".loop", value = "Allow the song to play on loop. Same command to disable the loop.")
    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
    await ctx.reply(embed=embed)
    await ctx.send(
@@ -346,6 +360,138 @@ async def weather(ctx, *,weath):
     embed=discord.Embed(title=f"{decode['weather'][0]['main']}", description=f"{decode['weather'][0]['description']}")
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
+ 
+# Lyrics command
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+@commands.guild_only()
+async def lyrics(ctx, artist,*, title):
+    url = requests.get(f'https://api.lyrics.ovh/v1/{artist}/{title}')
+    decode = json.loads(url.text)
+    embed=discord.Embed(title=f"Lyrics for {title}", description=f"{decode['lyrics']}")
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+    await ctx.reply(embed=embed)
+
+# Music commands
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def join(ctx):
+    voicetrue = ctx.author.voice
+    if voicetrue is None:
+        embed=discord.Embed(title="Voice channel not found", description="You have not joined a voice channel!", color = discord.Color.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        return await ctx.reply(embed=embed)
+    await ctx.author.voice.channel.connect()
+    embed=discord.Embed(title="Joined voice channel", description="I am now in your voice channel!", color = discord.Color.green())
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def leave(ctx):
+    voicetrue = ctx.author.voice
+    myvoicetrue = ctx.guild.me.voice
+    if voicetrue is None:
+        embed=discord.Embed(title="Voice channel not found", description="You have not joined a voice channel!", color = discord.Color.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        return await ctx.reply(embed=embed)
+    if myvoicetrue is None:
+        embed=discord.Embed(title="Voice channel not found", description="I am not currently in a voice channel!", color = discord.Color.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        return await ctx.reply(embed=embed)
+    await ctx.voice_client.disconnect()
+    embed=discord.Embed(title="Left voice channel", description="I have left your voice channel!", color = discord.Color.green())
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def play(ctx, *, url):
+    player = music.get_player(guild_id=ctx.guild.id)
+    if not player:
+        player = music.create_player(ctx, ffmpeg_error_betterfix=True)
+    if not ctx.voice_client.is_playing():
+        await player.queue(url, search=True)
+        song = await player.play()
+        embed=discord.Embed(title="Song successfully found!", description=f"Now playing {song.name}!", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+    else:
+        song = await player.queue(url, search=True)
+        embed=discord.Embed(title="Song successfully queued!", description=f"Queued {song.name}!", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def pause(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    song = await player.pause()
+    embed=discord.Embed(title="Song paused!", description=f"Paused {song.name}!", color = discord.Color.green())
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def resume(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    song = await player.resume()
+    embed=discord.Embed(title="Song resumed!", description=f"Resuming {song.name}!", color = discord.Color.green())
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def stop(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    await player.stop()
+    embed=discord.Embed(title="Song stopped!", description=f"Stopped {song.name}!", color = discord.Color.green())
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def loop(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    song = await player.toggle_song_loop()
+    if song.is_looping:
+        embed=discord.Embed(title="Loop enabled!", description=f"Enabled loop for {song.name}!", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+    else:
+        embed=discord.Embed(title="Loop disabled!", description=f"Disabled loop for {song.name}!", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def queue(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    embed=discord.Embed(title="Queue", description=f"**In queue :** {'  ,  '.join([song.name for song in player.current_queue()])}", color = discord.Color.green())
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def np(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    song = player.now_playing()
+    embed=discord.Embed(title="Now playing!", description=f"Currently playing {song.name}!", color = discord.Color.green())
+    await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def skip(ctx):
+    player = music.get_player(guild_id=ctx.guild.id)
+    data = await player.skip(force=True)
+    if len(data) == 2:
+        embed=discord.Embed(title="Skipping song!", description=f"Skipped from {data[0]} to {data[1]}", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+    else:
+        embed=discord.Embed(title="Skipping song!", description=f"Skipped {data[0].name}", color = discord.Color.green())
+        await ctx.reply(embed=embed)
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def remove(ctx, index):
+    player = music.get_player(guild_id=ctx.guild.id)
+    song = await player.remove_from_queue(int(index))
+    embed=discord.Embed(title="Removed song!", description=f"Removed {song.name} from queue", color = discord.Color.green())
+    await ctx.reply(embed=embed)    
 
 # More Error handling
 
@@ -434,6 +580,14 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Phrase not found! ",description = "Please enter a phrase to talk with Niko! For example : **.niko do you like School?**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
+        
+@play.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="URL not found! ",description = "Please enter a youtube URL to play!", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+  
         
 # Advice command
 
