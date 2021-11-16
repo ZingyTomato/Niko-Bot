@@ -29,13 +29,18 @@ DiscordComponents(client)
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='.help'))
     
-# Global cooldowm
+# Global cooldowm and error handling
 
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         embed=discord.Embed(title="Spammer detected!",description = f'Whoa whoa slow it down there buckaroo! You can execute this command in exactly {round(error.retry_after, 2)} seconds!',color = discord.Color.blue())
         await ctx.reply(embed=embed)
+    elif isinstance(error, commands.errors.CommandNotFound):
+        embed=discord.Embed(title="Command not found! ",description = "My systems have detected that you have entered an invalid command!", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
         
 # Leveling System
 
@@ -342,7 +347,7 @@ async def weather(ctx, *,weath):
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
 
-# Error handling
+# More Error handling
 
 @ban.error
 async def on_command_error(ctx, error):
@@ -429,15 +434,7 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Phrase not found! ",description = "Please enter a phrase to talk with Niko! For example : **.niko do you like School?**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.errors.CommandNotFound):
-        embed=discord.Embed(title="Command not found! ",description = "My systems have detected that you have entered an invalid command!", color=discord.Colour.red())
-        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
-        await ctx.reply(embed=embed)
-      
- 
+        
 # Advice command
 
 @client.command()
