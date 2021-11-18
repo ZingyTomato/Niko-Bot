@@ -210,6 +210,7 @@ async def Help(ctx):
    embed.add_field(name = ".resume", value = "Resume the song.")
    embed.add_field(name = ".queue", value = "View the queue for upcoming songs.")
    embed.add_field(name = ".loop", value = "Allow the song to play on loop. Same command to disable the loop.")
+   embed.add_field(name = ".giveaway", value = "Create a giveaway for anything you want!")
    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
    await ctx.reply(embed=embed)
    await ctx.send(
@@ -268,6 +269,25 @@ async def wallpaper(ctx, *,wall):
     embed=discord.Embed(title=f"Results for {wall}",color=discord.Color.orange()).set_image(url=f"{decode['hits'][random.randint(0,19)]['largeImageURL']}")
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
     await ctx.reply(embed=embed)
+   
+# Giveaway command
+
+@client.command()
+@commands.cooldown(5, 30, commands.BucketType.user)
+async def gcreate(ctx, time, *,prize):
+    embed = discord.Embed(title="Giveaway!!", description=f"{ctx.author.mention} has started a giveaway for **{prize}**!")
+    time_convert = {"s":10, "m":60, "h":3600, "d":86400}
+    gawtime = int(time[0]) * time_convert[time[-1]]
+    embed.set_footer(text=f"Giveaway ends in {time}")
+    gaw_msg = await ctx.reply(embed=embed)
+    await gaw_msg.add_reaction("🎉")
+    await asyncio.sleep(gawtime)
+    new_gaw_msg = await ctx.channel.fetch_message(gaw_msg.id)
+    users = await new_gaw_msg.reactions[0].users().flatten()
+    users.pop(users.index(client.user))
+    winner = random.choice(users)
+    embed = discord.Embed(title="Winner!!", description=f"{winner.mention} has won the giveaway for **{prize}**!")
+    await ctx.send(embed=embed)
 
 # Ping command
 
@@ -587,8 +607,15 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="URL not found! ",description = "Please enter a youtube URL to play!", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
-  
-        
+ 
+@gcreate.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="Giveaway not found! ",description = "Please start a giveaway! For example : **.gcreate 1m Never gonna give you up.**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+ 
+ 
 # Advice command
 
 @client.command()
