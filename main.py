@@ -8,6 +8,7 @@ import random
 from requests import get
 from discord.ext import commands
 import time
+import asyncio
 from googlesearch import search
 import aiohttp
 from discord_components import *
