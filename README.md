@@ -100,7 +100,7 @@ git clone https://github.com/ZingyTomato/Niko-Bot.git && cd Niko-Bot
 <br>
 <h2>Install Required Packages</h2>
 
-`pip3 install pycord requests aiohttp datetime discord_components json google`
+`pip3 install discord.py DiscordUtils[voice] discord_components google requests`
 <br>
 <h2> Discord Token </h2>
 
