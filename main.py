@@ -43,7 +43,7 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Spammer detected!",description = f'Whoa whoa slow it down there buckaroo! You can execute this command in exactly {round(error.retry_after, 2)} seconds!',color = discord.Color.blue())
         await ctx.reply(embed=embed)
     elif isinstance(error, commands.errors.CommandNotFound):
-        embed=discord.Embed(title="Command not found! ",description = "My systems have detected that you have entered an invalid command!", color=discord.Colour.red())
+        embed=discord.Embed(title="Command not found! ",description = "My systems have detected that you have entered an invalid command! Tip : Type **.help**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
 
@@ -211,7 +211,7 @@ async def Help(ctx):
    embed.add_field(name = ".resume", value = "Resume the song.")
    embed.add_field(name = ".queue", value = "View the queue for upcoming songs.")
    embed.add_field(name = ".loop", value = "Allow the song to play on loop. Same command to disable the loop.")
-   embed.add_field(name = ".giveaway", value = "Create a giveaway for anything you want!")
+   embed.add_field(name = ".gcreate", value = "Create a giveaway for anything you want!")
    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
    await ctx.reply(embed=embed)
    await ctx.send(
@@ -274,6 +274,7 @@ async def wallpaper(ctx, *,wall):
 # Giveaway command
 
 @client.command()
+@commands.has_permissions(kick_members=True)
 @commands.cooldown(5, 30, commands.BucketType.user)
 async def gcreate(ctx, time, *,prize):
     embed = discord.Embed(title="Giveaway!!", description=f"{ctx.author.mention} has started a giveaway for **{prize}**!")
@@ -615,8 +616,11 @@ async def on_command_error(ctx, error):
         embed=discord.Embed(title="Giveaway not found! ",description = "Please start a giveaway! For example : **.gcreate 1m Never gonna give you up.**", color=discord.Colour.red())
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed)
- 
- 
+    elif isinstance(error, commands.MissingPermissions):
+        embed=discord.Embed(title="Insufficient Permissions!",description = f"Don't be a doofus! You don't have the right permissions. Permissions needed {error.missing_perms}", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed) 
+        
 # Advice command
 
 @client.command()
