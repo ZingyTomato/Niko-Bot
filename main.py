@@ -132,7 +132,17 @@ async def on_message_edit(message_before, message_after):
     embed.add_field(name = "Edited Message", value = f"{message_after.content}", inline = False)
     channel = discord.utils.get(client.get_all_channels(), name="logs")
     await channel.send(embed=embed)
+    
+# Purging command
 
+@client.command(pass_context=True)
+@commands.has_permissions(manage_messages=True)
+async def clear(ctx, limit: int):
+        await ctx.channel.purge(limit=limit)
+        embed= discord.Embed(title="Messages deleted!", description=f"Successfully deleted messages", color=discord.Colour.green())
+        await ctx.message.delete()
+        await ctx.send(embed=embed)
+        
 # Slowmode command
 
 @client.command()
@@ -212,6 +222,7 @@ async def Help(ctx):
    embed.add_field(name = ".queue", value = "View the queue for upcoming songs.")
    embed.add_field(name = ".loop", value = "Allow the song to play on loop. Same command to disable the loop.")
    embed.add_field(name = ".gcreate", value = "Create a giveaway for anything you want!")
+   embed.add_field(name = ".clear", value = "Clear/Purge messages!")
    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
    await ctx.reply(embed=embed)
    await ctx.send(
@@ -621,6 +632,17 @@ async def on_command_error(ctx, error):
         embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
         await ctx.reply(embed=embed) 
         
+ @clear.error
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        embed=discord.Embed(title="Insufficient Permissions!",description = f"Don't be a doofus! You don't have the right permissions. Permissions needed {error.missing_perms}", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+    elif isinstance(error, commands.MissingRequiredArgument):
+        embed=discord.Embed(title="No. of messages no clear not found!!",description = "Please enter a number of messages to clear. For example :: **.clear 5**", color=discord.Colour.red())
+        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}")
+        await ctx.reply(embed=embed)
+
 # Advice command
 
 @client.command()
